@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
     "fmt"
+	"log"
 
 	"github.com/guptarohit/asciigraph"
 	"github.com/charmbracelet/lipgloss"
@@ -31,7 +32,7 @@ func main() {
 	flag.StringVar(&file, "path", "", "starting point")
 	flag.Parse()
 
-	if dir != "" {
+	if file != "" {
 		path = file
 	} else {
 		log.Fatal("Count not find the path to the CSV file")
