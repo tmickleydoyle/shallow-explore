@@ -1,11 +1,17 @@
 package main
 
 import (
+	"flag"
     "fmt"
 
 	"github.com/guptarohit/asciigraph"
 	"github.com/charmbracelet/lipgloss"
 	explore "github.com/tmickleydoyle/shallow-explore/utils"
+)
+
+var (
+	file string
+	path string
 )
 
 // This defines the look of the printed content to the terminal.
@@ -22,7 +28,16 @@ var style = lipgloss.NewStyle().
 
 // The final logic for pull together outputs for each column
 func main() {
-    records := explore.ReadCsvFile("/Users/tmickleydoyle/Desktop/sales.csv")
+	flag.StringVar(&file, "path", "", "starting point")
+	flag.Parse()
+
+	if dir != "" {
+		path = file
+	} else {
+		log.Fatal("Count not find the path to the CSV file")
+	}
+
+    records := explore.ReadCsvFile(path)
 	for column := range records[0] {
 		colValues := []string{}
 
