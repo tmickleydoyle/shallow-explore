@@ -22,7 +22,7 @@ var style = lipgloss.NewStyle().
 
 // The final logic for pull together outputs for each column
 func main() {
-    records := explore.readCsvFile("/Users/tmickleydoyle/Desktop/sales.csv")
+    records := explore.ReadCsvFile("/Users/tmickleydoyle/Desktop/sales.csv")
 	for column := range records[0] {
 		colValues := []string{}
 
