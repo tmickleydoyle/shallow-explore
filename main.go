@@ -29,7 +29,7 @@ var style = lipgloss.NewStyle().
 
 // The final logic for pull together outputs for each column
 func main() {
-	flag.StringVar(&file, "path", "", "starting point")
+	flag.StringVar(&file, "csv", "", "starting point")
 	flag.Parse()
 
 	if file != "" {
