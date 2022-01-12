@@ -1,4 +1,4 @@
-package swift-explore
+package shallow-explore
 
 import (
     "encoding/csv"
