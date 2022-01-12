@@ -1,4 +1,4 @@
-package shallow_explore
+package explore
 
 import (
     "encoding/csv"
@@ -27,7 +27,7 @@ func (p SortedList) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 func (p SortedList) Less(i, j int) bool { return p[i].Value > p[j].Value }
 
 // Loads the CSV file
-func readCsvFile(filePath string) [][]string {
+func ReadCsvFile(filePath string) [][]string {
     f, err := os.Open(filePath)
     if err != nil {
         log.Fatal("Unable to read input file "+filePath, err)
