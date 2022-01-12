@@ -22,7 +22,7 @@ var style = lipgloss.NewStyle().
 
 // The final logic for pull together outputs for each column
 func main() {
-    records := readCsvFile("/Users/tmickleydoyle/Desktop/sales.csv")
+    records := explore.readCsvFile("/Users/tmickleydoyle/Desktop/sales.csv")
 	for column := range records[0] {
 		colValues := []string{}
 
@@ -30,8 +30,8 @@ func main() {
 			colValues = append(colValues, records[i][column])
 		}
 
-		transformedArray, _, _ := ConvertStringToInt(colValues)
-		plotArray, stringValues, _ := ConvertStringToInt(colValues)
+		transformedArray, _, _ := explore.ConvertStringToInt(colValues)
+		plotArray, stringValues, _ := explore.ConvertStringToInt(colValues)
 		column := fmt.Sprintf("Column: %s\n\n", records[0][column])
 		
 		// The first part of the if is for int/float columns, and the
