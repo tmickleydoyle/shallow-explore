@@ -5,7 +5,7 @@ import (
 
 	"github.com/guptarohit/asciigraph"
 	"github.com/charmbracelet/lipgloss"
-	explore "github.com/tmickleydoyle/shallow-explore"
+	explore "github.com/tmickleydoyle/shallow-explore/utils"
 )
 
 // This defines the look of the printed content to the terminal.
