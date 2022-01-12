@@ -1,4 +1,4 @@
-package shallow-explore
+package shallow_explore
 
 import (
     "encoding/csv"
