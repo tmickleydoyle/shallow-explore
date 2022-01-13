@@ -8,7 +8,7 @@ From the command line, quickly explore data from a CSV file.
 After installation, run the following command to start analyzing data:
 
 ```bash
-shallow-explore -path ~/Desktop/sample.csv
+shallow-explore -csv ~/Desktop/sample.csv
 ```
 
 ### Output
