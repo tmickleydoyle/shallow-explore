@@ -44,7 +44,7 @@ func ReadCsvFile(filePath string) [][]string {
 }
 
 // Check the columns in the CSV file to converted string based int/float to float64
-func ConvertStringToInt(stringArray []string) ([]float64, []string, error) {
+func ConvertStringToInt(stringArray []string) ([]float64, []string) {
     var intArray []float64
 
     for _, i := range stringArray {
@@ -58,7 +58,7 @@ func ConvertStringToInt(stringArray []string) ([]float64, []string, error) {
         }
     }
 
-	return intArray, stringArray, nil
+	return intArray, stringArray
 }
 
 // Finds the min and max from an array
