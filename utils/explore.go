@@ -50,9 +50,7 @@ func ConvertStringToInt(stringArray []string) ([]float64, []string) {
     for _, i := range stringArray {
         if convertNum, err := strconv.ParseFloat(i, 64); err == nil {
             intArray = append(intArray, convertNum)
-        }
-
-		if intValue, err := strconv.ParseInt(i, 10, 64); err == nil {
+        } else if intValue, err := strconv.ParseInt(i, 10, 64); err == nil {
 			convertNum := float64(intValue)
             intArray = append(intArray, convertNum)
         }
@@ -62,7 +60,7 @@ func ConvertStringToInt(stringArray []string) ([]float64, []string) {
 }
 
 // Finds the min and max from an array
-func MinMaxValuse(intArray []float64) (float64, float64) {
+func MinMaxValues(intArray []float64) (float64, float64) {
     var max float64 = intArray[0]
     var min float64 = intArray[0]
     for _, value := range intArray {

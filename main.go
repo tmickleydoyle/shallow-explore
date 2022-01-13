@@ -53,7 +53,7 @@ func main() {
 		// The first part of the if is for int/float columns, and the
 		// else is used for string based columns
 		if len(transformedArray) > 0 {
-			min, max := explore.MinMaxValuse(transformedArray)
+			min, max := explore.MinMaxValues(transformedArray)
 			mean := explore.MeanValue(transformedArray)
 			median := explore.MedianValue(transformedArray)
 			statsOutput := explore.FloatOutput(min, max, mean, median)
