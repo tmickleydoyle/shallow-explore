@@ -35,7 +35,7 @@ func main() {
 	if file != "" {
 		path = file
 	} else {
-		log.Fatal("Count not find the path to the CSV file")
+		log.Fatal("Could not find the path to the CSV file")
 	}
 
     records := explore.ReadCsvFile(path)
