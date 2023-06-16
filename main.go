@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"context"
+	"os"
 
 	"github.com/guptarohit/asciigraph"
 	"github.com/charmbracelet/lipgloss"
@@ -43,15 +43,6 @@ func main() {
 	flag.StringVar(&file, "csv", "", "starting point")
 	flag.StringVar(&style, "style", "", "output style (dark or light)")
 	flag.Parse()
-
-	message := "Hello, ChatGPT!"
-
-	reply, err := explore.CallChatGPTAPI(message, os.Getenv("OPENAI_TOKEN")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(reply)
 
 	if file != "" {
 		path = file

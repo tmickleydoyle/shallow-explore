@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"math"
-	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -190,7 +189,7 @@ func CallChatGPTAPI(message string, authToken string) (string, error) {
 
 	client := &http.Client{}
 
-	req, err := http.NewRequest("POST", "https://api.chatgpt.com/v1/chat/completions", bytes.NewBuffer(payloadBytes))
+	req, err := http.NewRequest("POST", "https://api.chatgpt.com/v1/chat/completions", bytes.NewBuffer(payloadBytes)) 
 	if err != nil {
 		return "", err
 	}
