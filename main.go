@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"context"
 
 	"github.com/guptarohit/asciigraph"
 	"github.com/charmbracelet/lipgloss"
@@ -45,7 +46,7 @@ func main() {
 
 	message := "Hello, ChatGPT!"
 
-	reply, err := CallChatGPTAPI(message)
+	reply, err := explore.CallChatGPTAPI(message, os.Getenv("OPENAI_TOKEN")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -58,7 +59,7 @@ func main() {
 		log.Fatal("Could not find the path to the CSV file")
 	}
 
-	records := ReadCSVFile(path)
+	records := explore.ReadCSVFile(path)
 	for column := range records[0] {
 		colValues := []string{}
 
@@ -66,8 +67,8 @@ func main() {
 			colValues = append(colValues, records[i][column])
 		}
 
-		transformedArray, _ := ConvertStringToInt(colValues)
-		plotArray, stringValues := ConvertStringToInt(colValues)
+		transformedArray, _ := explore.ConvertStringToInt(colValues)
+		plotArray, stringValues := explore.ConvertStringToInt(colValues)
 		column := fmt.Sprintf("Column: %s\n\n", records[0][column])
 
 		var selectedStyle lipgloss.Style
@@ -78,16 +79,16 @@ func main() {
 		}
 
 		if len(transformedArray) > 0 {
-			min, max := MinMaxValues(transformedArray)
-			mean := MeanValue(transformedArray)
-			median := MedianValue(transformedArray)
-			statsOutput := FloatOutput(min, max, mean, median)
+			min, max := explore.MinMaxValues(transformedArray)
+			mean := explore.MeanValue(transformedArray)
+			median := explore.MedianValue(transformedArray)
+			statsOutput := explore.FloatOutput(min, max, mean, median)
 			graph := asciigraph.Plot(plotArray, asciigraph.Height(20), asciigraph.Width(90), asciigraph.Caption(statsOutput))
 			fmt.Println(selectedStyle.Render(column + graph))
 		} else {
-			valuesMap := CountValues(stringValues)
-			sortedMap := SortMapByValue(valuesMap)
-			histogram := HistTopTen(sortedMap, column)
+			valuesMap := explore.CountValues(stringValues)
+			sortedMap := explore.SortMapByValue(valuesMap)
+			histogram := explore.HistTopTen(sortedMap, column)
 			fmt.Println(selectedStyle.Render(column + histogram))
 		}
 	}

@@ -178,7 +178,7 @@ type ChatGPTResponse struct {
 	Reply string `json:"reply"`
 }
 
-func CallChatGPTAPI(message string) (string, error) {
+func CallChatGPTAPI(message string, authToken string) (string, error) {
 	payload := ChatGPTRequest{
 		Message: message,
 	}
@@ -188,12 +188,21 @@ func CallChatGPTAPI(message string) (string, error) {
 		return "", err
 	}
 
-	client := http.DefaultClient
+	client := &http.Client{}
 
-	resp, err := client.Post("https://api.chatgpt.com/v1/chat/completions", "application/json", bytes.NewBuffer(payloadBytes))
+	req, err := http.NewRequest("POST", "https://api.chatgpt.com/v1/chat/completions", bytes.NewBuffer(payloadBytes))
 	if err != nil {
 		return "", err
 	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+authToken)
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
 
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
