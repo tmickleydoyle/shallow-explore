@@ -8,7 +8,14 @@ From the command line, quickly explore data from a CSV file.
 After installation, run the following command to start analyzing data:
 
 ```bash
+# Style (default): light mode
 shallow-explore -csv ~/complete/path/to/file/sample.csv
+
+# Style: dark mode
+shallow-explore -csv ~/complete/path/to/file/sample.csv -style dark
+
+# Style: light mode
+shallow-explore -csv ~/complete/path/to/file/sample.csv -style light
 ```
 
 Note: The complete path of the file is required to load the data into the program.
@@ -30,7 +37,7 @@ For string-based data, the column name is still at the top of the output. Below 
 If Golang is installed, run the following command:
 
 ```bash
-go get github.com/tmickleydoyle/shallow-explore
+go install github.com/tmickleydoyle/shallow-explore
 ```
 
 ## Instructions for Installing Go
