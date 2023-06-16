@@ -4,7 +4,6 @@ import (
 	"testing"
 )
 
-// Test to  make sure arrays with int/floats as string are converted correctly
 func TestConvertStringToInt(t *testing.T) {
 	intArray, origArray := ConvertStringToInt([]string{"1", "2", "3"})
 
@@ -22,7 +21,6 @@ func TestConvertStringToInt(t *testing.T) {
 	}
 }
 
-// Test to find the min and max of an array
 func TestMinMaxValues(t *testing.T) {
 	minValue, maxValue := MinMaxValues([]float64{1.0, 2.0, 3.0})
 
@@ -32,10 +30,8 @@ func TestMinMaxValues(t *testing.T) {
 	if maxValue != 3 {
 		t.Errorf("Min value is not calculated properly")
 	}
-
 }
 
-// Test for mean value
 func TestMeanValue(t *testing.T) {
 	meanValue := MeanValue([]float64{1.0, 2.0, 3.0})
 
@@ -44,7 +40,6 @@ func TestMeanValue(t *testing.T) {
 	}
 }
 
-// Test for median value
 func TestMedianValue(t *testing.T) {
 	medianValue := MedianValue([]float64{1.0, 2.0, 3.0})
 
