@@ -7,7 +7,7 @@ import (
 
 	"github.com/guptarohit/asciigraph"
 	"github.com/charmbracelet/lipgloss"
-	explore "github.com/tmickleydoyle/shallow-explore/utils"
+	explore "github.com/tmickleydoyle/shallow-explore/utils"	
 )
 
 var (
@@ -45,7 +45,7 @@ func main() {
 
 	message := "Hello, ChatGPT!"
 
-	reply, err := explore.CallChatGPTAPI(message)
+	reply, err := CallChatGPTAPI(message)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -58,7 +58,7 @@ func main() {
 		log.Fatal("Could not find the path to the CSV file")
 	}
 
-	records := explore.ReadCSVFile(path)
+	records := ReadCSVFile(path)
 	for column := range records[0] {
 		colValues := []string{}
 
@@ -66,8 +66,8 @@ func main() {
 			colValues = append(colValues, records[i][column])
 		}
 
-		transformedArray, _ := explore.ConvertStringToInt(colValues)
-		plotArray, stringValues := explore.ConvertStringToInt(colValues)
+		transformedArray, _ := ConvertStringToInt(colValues)
+		plotArray, stringValues := ConvertStringToInt(colValues)
 		column := fmt.Sprintf("Column: %s\n\n", records[0][column])
 
 		var selectedStyle lipgloss.Style
@@ -78,16 +78,16 @@ func main() {
 		}
 
 		if len(transformedArray) > 0 {
-			min, max := explore.MinMaxValues(transformedArray)
-			mean := explore.MeanValue(transformedArray)
-			median := explore.MedianValue(transformedArray)
-			statsOutput := explore.FloatOutput(min, max, mean, median)
+			min, max := MinMaxValues(transformedArray)
+			mean := MeanValue(transformedArray)
+			median := MedianValue(transformedArray)
+			statsOutput := FloatOutput(min, max, mean, median)
 			graph := asciigraph.Plot(plotArray, asciigraph.Height(20), asciigraph.Width(90), asciigraph.Caption(statsOutput))
 			fmt.Println(selectedStyle.Render(column + graph))
 		} else {
-			valuesMap := explore.CountValues(stringValues)
-			sortedMap := explore.SortMapByValue(valuesMap)
-			histogram := explore.HistTopTen(sortedMap, column)
+			valuesMap := CountValues(stringValues)
+			sortedMap := SortMapByValue(valuesMap)
+			histogram := HistTopTen(sortedMap, column)
 			fmt.Println(selectedStyle.Render(column + histogram))
 		}
 	}
