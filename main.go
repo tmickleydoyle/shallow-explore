@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/guptarohit/asciigraph"
 	"github.com/charmbracelet/lipgloss"
