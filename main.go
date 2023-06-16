@@ -11,11 +11,12 @@ import (
 )
 
 var (
-	file string
-	path string
+	file  string
+	path  string
+	style string
 )
 
-var style = lipgloss.NewStyle().
+var styleDark = lipgloss.NewStyle().
 	Bold(true).
 	Foreground(lipgloss.Color("#FAFAFA")).
 	Background(lipgloss.Color("#808080")).
@@ -26,9 +27,30 @@ var style = lipgloss.NewStyle().
 	BorderStyle(lipgloss.NormalBorder()).
 	BorderForeground(lipgloss.Color("#FAFAFA"))
 
+var styleLight = lipgloss.NewStyle().
+	Bold(true).
+	Foreground(lipgloss.Color("#808080")).
+	Background(lipgloss.Color("#FAFAFA")).
+	PaddingTop(1).
+	PaddingBottom(1).
+	PaddingLeft(2).
+	PaddingRight(2).
+	BorderStyle(lipgloss.NormalBorder()).
+	BorderForeground(lipgloss.Color("#808080"))
+
 func main() {
 	flag.StringVar(&file, "csv", "", "starting point")
+	flag.StringVar(&style, "style", "", "output style (dark or light)")
 	flag.Parse()
+
+	message := "Hello, ChatGPT!"
+
+	reply, err := explore.CallChatGPTAPI(message)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(reply)
 
 	if file != "" {
 		path = file
@@ -48,18 +70,25 @@ func main() {
 		plotArray, stringValues := explore.ConvertStringToInt(colValues)
 		column := fmt.Sprintf("Column: %s\n\n", records[0][column])
 
+		var selectedStyle lipgloss.Style
+		if style == "dark" {
+			selectedStyle = styleDark
+		} else {
+			selectedStyle = styleLight
+		}
+
 		if len(transformedArray) > 0 {
 			min, max := explore.MinMaxValues(transformedArray)
 			mean := explore.MeanValue(transformedArray)
 			median := explore.MedianValue(transformedArray)
 			statsOutput := explore.FloatOutput(min, max, mean, median)
 			graph := asciigraph.Plot(plotArray, asciigraph.Height(20), asciigraph.Width(90), asciigraph.Caption(statsOutput))
-			fmt.Println(style.Render(column + graph))
+			fmt.Println(selectedStyle.Render(column + graph))
 		} else {
 			valuesMap := explore.CountValues(stringValues)
 			sortedMap := explore.SortMapByValue(valuesMap)
 			histogram := explore.HistTopTen(sortedMap, column)
-			fmt.Println(style.Render(column + histogram))
+			fmt.Println(selectedStyle.Render(column + histogram))
 		}
 	}
 }
