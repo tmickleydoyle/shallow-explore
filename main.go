@@ -36,7 +36,7 @@ func main() {
 		log.Fatal("Could not find the path to the CSV file")
 	}
 
-	records := explore.ReadCsvFile(path)
+	records := explore.ReadCSVFile(path)
 	for column := range records[0] {
 		colValues := []string{}
 
